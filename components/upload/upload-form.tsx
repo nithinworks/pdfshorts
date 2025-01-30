@@ -1,9 +1,13 @@
 'use client';
 
-import { generatePdfSummary } from '@/actions/upload-actions';
+import {
+  generatePdfSummary,
+  storePdfSummaryAction,
+} from '@/actions/upload-actions';
 import UploadFormInput from '@/components/upload/upload-form-input';
 import { useToast } from '@/hooks/use-toast';
 import { useUploadThing } from '@/utils/uploadthing';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { z } from 'zod';
 
@@ -24,6 +28,7 @@ export default function UploadForm() {
   const { toast } = useToast();
   const formRef = useRef<HTMLFormElement>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
   const { startUpload, routeConfig } = useUploadThing('pdfUploader', {
     onClientUploadComplete: () => {
@@ -94,21 +99,35 @@ export default function UploadForm() {
       const { data = null, message = null } = result || {};
 
       if (data) {
+        let storeResult: any;
         toast({
           title: '📄 Saving PDF...',
           description: 'Hang tight! We are saving your summary! ✨',
         });
-        formRef.current?.reset();
+
         if (data.summary) {
+          storeResult = await storePdfSummaryAction({
+            summary: data.summary,
+            fileUrl: resp[0].serverData.file.url,
+            title: data.title,
+            fileName: file.name,
+          });
           // save the summary to the database
+          toast({
+            title: '✨ Summary Generated!',
+            description: 'Your PDF has been successfully summarized and saved',
+          });
+
+          formRef.current?.reset();
+          router.push(`/summaries/${storeResult.data.id}`);
         }
       }
-      //summarize the pdf using AI
-      //redirect to the [id] summary page
     } catch (error) {
       setIsLoading(false);
       console.error('Error occurred', error);
       formRef.current?.reset();
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
