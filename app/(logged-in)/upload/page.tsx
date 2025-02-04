@@ -18,10 +18,10 @@ export default async function Page() {
 
   const { hasReachedLimit } = await hasReachedUploadLimit(userId);
 
-  //todo: remove this
-  if (!hasReachedLimit) {
-    redirect('/dashboard');
-  }
+  // //todo: remove this
+  // if (hasReachedLimit) {
+  //   redirect('/dashboard');
+  // }
 
   return (
     <section className="min-h-screen">
