@@ -42,8 +42,8 @@ export default function UploadForm() {
         description: err.message,
       });
     },
-    onUploadBegin: ({ file }) => {
-      console.log('upload has begun for', file);
+    onUploadBegin: (data) => {
+      console.log('upload has begun for', data);
     },
   });
 
@@ -57,8 +57,6 @@ export default function UploadForm() {
 
       //validating the fields
       const validatedFields = schema.safeParse({ file });
-
-      console.log(validatedFields);
 
       if (!validatedFields.success) {
         toast({
@@ -79,8 +77,8 @@ export default function UploadForm() {
 
       //upload the file to uploadthing
 
-      const resp = await startUpload([file]);
-      if (!resp) {
+      const uploadResponse = await startUpload([file]);
+      if (!uploadResponse) {
         toast({
           title: 'Something went wrong',
           description: 'Please use a different file',
@@ -94,8 +92,13 @@ export default function UploadForm() {
         title: '📄 Processing PDF',
         description: 'Hang tight! Our AI is reading through your document! ✨',
       });
+      const uploadFileUrl = uploadResponse[0].serverData.fileUrl;
+
       //parse the pdf using lang chain
-      const result = await generatePdfSummary(resp);
+      const result = await generatePdfSummary({
+        fileUrl: uploadFileUrl,
+        fileName: file.name,
+      });
 
       const { data = null, message = null } = result || {};
 
@@ -109,7 +112,7 @@ export default function UploadForm() {
         if (data.summary) {
           storeResult = await storePdfSummaryAction({
             summary: data.summary,
-            fileUrl: resp[0].serverData.file.url,
+            fileUrl: uploadFileUrl,
             title: data.title,
             fileName: file.name,
           });
