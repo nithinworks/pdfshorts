@@ -2,6 +2,7 @@
 
 import {
   generatePdfSummary,
+  generatePdfText,
   storePdfSummaryAction,
 } from '@/actions/upload-actions';
 import UploadFormInput from '@/components/upload/upload-form-input';
@@ -11,6 +12,7 @@ import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import { z } from 'zod';
 import LoadingSkeleton from './loading-skeleton';
+import { formatFileNameAsTitle } from '@/utils/format-utils';
 
 const schema = z.object({
   file: z
@@ -94,37 +96,53 @@ export default function UploadForm() {
       });
       const uploadFileUrl = uploadResponse[0].serverData.fileUrl;
 
-      //parse the pdf using lang chain
-      const result = await generatePdfSummary({
-        fileUrl: uploadFileUrl,
-        fileName: file.name,
+      let storeResult: any;
+      toast({
+        title: '📄 Saving PDF...',
+        description: 'Hang tight! We are saving your summary! ✨',
       });
 
-      const { data = null, message = null } = result || {};
+      const formattedFileName = formatFileNameAsTitle(file.name);
 
-      if (data) {
-        let storeResult: any;
+      const result = await generatePdfText({
+        fileUrl: uploadFileUrl,
+      });
+
+      toast({
+        title: '📄 Generating PDF Summary',
+        description: 'Hang tight! Our AI is reading through your document! ✨',
+      });
+
+      //call ai service
+      //parse the pdf using lang chain
+      const summaryResult = await generatePdfSummary({
+        pdfText: result?.data?.pdfText ?? '',
+        fileName: formattedFileName,
+      });
+
+      toast({
+        title: '📄 Saving PDF Summary',
+        description: 'Hang tight! We are saving your summary! ✨',
+      });
+
+      const { data = null, message = null } = summaryResult || {};
+
+      if (data?.summary) {
+        //save the summary to the database
+        storeResult = await storePdfSummaryAction({
+          summary: data.summary,
+          fileUrl: uploadFileUrl,
+          title: formattedFileName,
+          fileName: file.name,
+        });
+        // save the summary to the database
         toast({
-          title: '📄 Saving PDF...',
-          description: 'Hang tight! We are saving your summary! ✨',
+          title: '✨ Summary Generated!',
+          description: 'Your PDF has been successfully summarized and saved',
         });
 
-        if (data.summary) {
-          storeResult = await storePdfSummaryAction({
-            summary: data.summary,
-            fileUrl: uploadFileUrl,
-            title: data.title,
-            fileName: file.name,
-          });
-          // save the summary to the database
-          toast({
-            title: '✨ Summary Generated!',
-            description: 'Your PDF has been successfully summarized and saved',
-          });
-
-          formRef.current?.reset();
-          router.push(`/summaries/${storeResult.data.id}`);
-        }
+        formRef.current?.reset();
+        router.push(`/summaries/${storeResult.data.id}`);
       }
     } catch (error) {
       setIsLoading(false);
