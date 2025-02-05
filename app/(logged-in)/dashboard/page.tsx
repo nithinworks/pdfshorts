@@ -23,7 +23,12 @@ export default async function DashboardPage() {
     return redirect('/sign-in');
   }
 
-  const { hasReachedLimit, uploadLimit } = await hasReachedUploadLimit(userId);
+  const email = user?.emailAddresses?.[0]?.emailAddress;
+
+  const { hasReachedLimit, uploadLimit } = await hasReachedUploadLimit({
+    userId,
+    email,
+  });
 
   const summaries = await getSummaries(userId);
   return (
