@@ -21,6 +21,7 @@ export async function generateSummaryFromOpenAI(pdfText: string) {
     });
     return completion.choices[0].message.content;
   } catch (error: any) {
+    console.log('Error occurred during openai', error);
     if (error?.status === 429) {
       throw new Error('RATE_LIMIT_EXCEEDED');
     }
