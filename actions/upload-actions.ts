@@ -63,6 +63,11 @@ export async function generatePdfSummary({
           );
         }
       }
+      return {
+        success: false,
+        message: 'Failed to generate summary',
+        data: null,
+      };
     }
 
     if (!summary) {
