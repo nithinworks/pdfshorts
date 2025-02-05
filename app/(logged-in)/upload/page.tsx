@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import { MotionDiv } from '@/components/common/motion-wrapper';
 import { containerVariants } from '@/utils/constants';
 
+export const maxDuration = 20;
+
 export default async function Page() {
   const user = await currentUser();
 
