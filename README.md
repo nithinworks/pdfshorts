@@ -40,14 +40,17 @@ Built with Next.js 15 App Router, Clerk for Auth, React, OpenAI GPT-4, Langchain
 
 To get started with this project:
 
-1. Fork the repo
+1. Fork the repo (learn how to fork and clone below)
 2. Copy the .env.example variables into a separate .env.local file
 3. Create the required credentials:
-   - OpenAI API key
-   - Clerk authentication
-   - UploadThing configuration
-   - Stripe payment setup
-   - NeonDB database connection
+   - [OpenAI API key](https://platform.openai.com/docs/overview)
+   - [Gemini API key](https://aistudio.google.com/apikey)
+   - [Clerk authentication](https://go.clerk.com/5qOWrFA)
+   - [UploadThing configuration](https://uploadthing.com/)
+   - [Stripe payment setup](https://stripe.com/en-ca)
+   - [NeonDB database connection](https://bit.ly/neondb-link)
+4. Create a Project and then a database in NeonDb
+5. Copy schema.sql and run that in NeonDb SQL Editor
 
 ## 🔨 How to Fork and Clone
 
