@@ -1,3 +1,4 @@
+import { ORIGIN_URL } from '@/utils/constants';
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -15,9 +16,18 @@ const Footer = () => {
     {
       title: 'By the Maker of this Site',
       links: [
-        { text: 'Proofy Bubble', href: 'https://proofybubble.com' },
-        { text: 'Rave Reviews', href: 'https://ravereviews.vercel.app' },
-        { text: 'Speakeasy AI', href: 'https://speakeasyai.dev' },
+        {
+          text: 'Proofy Bubble',
+          href: `https://proofybubble.com?ref=${ORIGIN_URL}`,
+        },
+        {
+          text: 'Rave Reviews',
+          href: `https://ravereviews.vercel.app?ref=${ORIGIN_URL}`,
+        },
+        {
+          text: 'Speakeasy AI',
+          href: `https://speakeasyai.dev?ref=${ORIGIN_URL}`,
+        },
       ],
     },
     {
@@ -25,39 +35,48 @@ const Footer = () => {
       links: [
         {
           text: 'Build Modern Full-Stack Apps: Next.js Course',
-          href: 'https://nextjscourse.dev/',
+          href: `https://nextjscourse.dev/?ref=${ORIGIN_URL}`,
         },
-        { text: 'Next.js Workshop', href: 'https://nextjsworkshop.dev' },
-        { text: 'Developer to Leader', href: 'https://developertoleader.com' },
+        {
+          text: 'Next.js Workshop',
+          href: `https://nextjsworkshop.dev?ref=${ORIGIN_URL}`,
+        },
+        {
+          text: 'Developer to Leader',
+          href: `https://developertoleader.com?ref=${ORIGIN_URL}`,
+        },
         {
           text: "Engineering Leader's Playbook",
-          href: 'https://kulkarniankita.gumroad.com/l/growthfor90days',
+          href: `https://kulkarniankita.gumroad.com/l/growthfor90days?ref=${ORIGIN_URL}`,
         },
       ],
     },
     {
       title: 'Resources',
       links: [
-        { text: 'Blog', href: 'https://kulkarniankita.com/blog' },
+        {
+          text: 'Blog',
+          href: `https://kulkarniankita.com/blog?ref=${ORIGIN_URL}`,
+        },
         {
           text: 'Frontend Snacks Newsletter',
-          href: 'https://frontendsnacks.dev',
+          href: `https://frontendsnacks.dev?ref=${ORIGIN_URL}`,
         },
         {
           text: "Engineering Leader's Snacks Newsletter",
-          href: 'https://www.engineeringleadershipsnacks.dev/',
+          href: `https://www.engineeringleadershipsnacks.dev/?ref=${ORIGIN_URL}`,
         },
         {
           text: 'Free Course:Next.js Hot Tips',
-          href: 'https://nextjsworkshop.dev/hot-tips',
+          href: `https://nextjsworkshop.dev/hot-tips?ref=${ORIGIN_URL}`,
         },
         {
-          link: 'https://kulkarniankita.com/',
-          title: 'Personal Website',
+          text: 'Personal Website',
+          href: `https://kulkarniankita.com/?ref=${ORIGIN_URL}`,
         },
         {
-          link: 'https://www.frontendsnacks.dev/',
-          title: 'Frontend Snacks Newsletter',
+          text: 'Frontend Snacks Newsletter',
+          href: `https://www.frontendsnacks.dev/?ref=${ORIGIN_URL}`,
         },
       ],
     },
@@ -96,7 +115,7 @@ const Footer = () => {
             <ul className="text-gray-600 dark:text-gray-500 list-none">
               {footerSections[0].links.map((linkCol, idx) => {
                 return (
-                  <li className="mb-1" key={`${idx}-${linkCol.title}`}>
+                  <li className="mb-1" key={`${idx}-${linkCol.text}`}>
                     <a
                       href={linkCol.href}
                       className="hover:underline dark:text-gray-400"
@@ -115,7 +134,7 @@ const Footer = () => {
             <ul className="text-gray-600 dark:text-gray-500 list-none">
               {footerSections[1].links.map((linkCol, idx) => {
                 return (
-                  <li className="mb-1" key={`${idx}-${linkCol.title}`}>
+                  <li className="mb-1" key={`${idx}-${linkCol.text}`}>
                     <a
                       href={linkCol.href}
                       className="hover:underline dark:text-gray-400"
@@ -134,7 +153,7 @@ const Footer = () => {
             <ul className="text-gray-600 dark:text-gray-400 list-none">
               {footerSections[2].links.map((linkCol, idx) => {
                 return (
-                  <li className="mb-1" key={`${idx}-${linkCol.title}`}>
+                  <li className="mb-1" key={`${idx}-${linkCol.text}`}>
                     <a
                       href={linkCol.href}
                       className="hover:underline dark:text-gray-400"
