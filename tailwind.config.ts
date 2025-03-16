@@ -1,4 +1,10 @@
-import type { Config } from "tailwindcss/types";
+export interface Config {
+  content: string[];
+  theme: {
+    extend: object;
+  };
+  plugins: any[];
+}
 
 const config: Config = {
   content: [
