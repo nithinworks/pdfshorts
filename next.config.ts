@@ -1,11 +1,13 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
   eslint: {
-    //this allows prod builds to successfully complete
+    // This allows prod builds to successfully complete
     ignoreDuringBuilds: true,
   },
+  reactStrictMode: true,
+  swcMinify: true,
+  output: "standalone",
 };
 
 export default nextConfig;
