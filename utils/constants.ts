@@ -67,5 +67,5 @@ export const itemVariants = {
 };
 
 export const ORIGIN_URL = isDev
-  ? "http://localhost:3000"
-  : "https://summarize.so";
+  ? "https://pdfshorts.vercel.app"
+  : "https://pdfshorts.vercel.app";
