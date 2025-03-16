@@ -1,31 +1,25 @@
-import type { Metadata } from 'next';
-import { Source_Sans_3 as FontSans } from 'next/font/google';
-import './globals.css';
-import Header from '@/components/common/header';
-import Footer from '@/components/common/footer';
-import { ClerkProvider } from '@clerk/nextjs';
-import { Toaster } from '@/components/ui/toaster';
-import { ORIGIN_URL } from '@/utils/helpers';
+import type { Metadata } from "next";
+import { Source_Sans_3 as FontSans } from "next/font/google";
+import "./globals.css";
+import Header from "@/components/common/header";
+import Footer from "@/components/common/footer";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "@/components/ui/toaster";
+import { ORIGIN_URL } from "@/utils/helpers";
+import { Toaster as SonnerToaster } from "sonner";
 
 const fontSans = FontSans({
-  variable: '--font-sans',
-  subsets: ['latin'],
-  weight: ['200', '300', '400', '500', '600', '700', '800', '900'],
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800", "900"],
 });
 
 export const metadata: Metadata = {
-  title: 'Sommaire - AI-Powered PDF Summarization',
+  title: "PDF Shorts – Turn Pages Into Insights Instantly!",
   description:
-    'Save hours of reading time. Transform lengthy PDFs into clear, accurate summaries in seconds with our advanced AI technology.',
+    "Cut through the clutter. Instantly transform long PDFs into clear, accurate summaries with AI – saving you hours of reading time.",
   icons: {
-    icon: '/icon.ico',
-  },
-  openGraph: {
-    images: [
-      {
-        url: '/opengraph-image.png',
-      },
-    ],
+    icon: "/icon.ico",
   },
   metadataBase: new URL(ORIGIN_URL),
   alternates: {
@@ -48,6 +42,7 @@ export default function RootLayout({
             <Footer />
           </div>
           <Toaster />
+          <SonnerToaster position="top-center" richColors />
         </body>
       </html>
     </ClerkProvider>

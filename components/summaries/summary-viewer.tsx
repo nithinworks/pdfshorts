@@ -1,12 +1,12 @@
-'use client';
+"use client";
 
-import { parseSection } from '@/utils/summary-helpers';
-import { useState } from 'react';
-import { Card } from '../ui/card';
-import { NavigationControls } from './navigation-controls';
-import ProgressBar from './progress-bar';
-import ContentSection from './content-section';
-import { MotionDiv } from '@/components/common/motion-wrapper';
+import { parseSection } from "@/utils/summary-helpers";
+import { useState } from "react";
+import { Card } from "../ui/card";
+import { NavigationControls } from "./navigation-controls";
+import ProgressBar from "./progress-bar";
+import ContentSection from "./content-section";
+import { MotionDiv } from "@/components/common/motion-wrapper";
 
 const SectionTitle = ({ title }: { title: string }) => {
   return (
@@ -28,7 +28,7 @@ export function SummaryViewer({ summary }: { summary: string }) {
     setCurrentSection((prev) => Math.max(prev - 1, 0));
 
   const sections = summary
-    .split('\n# ')
+    .split("\n# ")
     .map((section) => section.trim())
     .filter(Boolean)
     .map(parseSection);
@@ -49,14 +49,14 @@ export function SummaryViewer({ summary }: { summary: string }) {
         key={currentSection}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        transition={{ duration: 0.2, ease: 'easeInOut' }}
+        transition={{ duration: 0.2, ease: "easeInOut" }}
         exit={{ opacity: 0 }}
         className="h-full overflow-y-auto scrollbar-hide pt-12 sm:pt-16 pb-20 sm:pb-24"
       >
         <div className="px-4 sm:px-6">
-          <SectionTitle title={sections[currentSection]?.title || ''} />
+          <SectionTitle title={sections[currentSection]?.title || ""} />
           <ContentSection
-            title={sections[currentSection]?.title || ''}
+            title={sections[currentSection]?.title || ""}
             points={sections[currentSection]?.points || []}
           />
         </div>

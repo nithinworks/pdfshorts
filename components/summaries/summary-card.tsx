@@ -1,11 +1,11 @@
-import { Card } from '@/components/ui/card';
-import DeleteButton from './delete-button';
-import Link from 'next/link';
-import { FileText } from 'lucide-react';
-import { cn, formatFileName } from '@/lib/utils';
-import { formatDistanceToNow } from 'date-fns';
-import { MotionDiv } from '../common/motion-wrapper';
-import { itemVariants } from '@/utils/constants';
+import { Card } from "@/components/ui/card";
+import DeleteButton from "./delete-button";
+import Link from "next/link";
+import { FileText } from "lucide-react";
+import { cn, formatFileName } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import { MotionDiv } from "../common/motion-wrapper";
+import { itemVariants } from "@/utils/constants";
 
 const SummaryHeader = ({
   fileUrl,
@@ -18,7 +18,7 @@ const SummaryHeader = ({
 }) => {
   return (
     <div className="flex items-start gap-2 sm:gap-4">
-      <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-rose-400 mt-1" />
+      <FileText className="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600 mt-1" />
       <div className="flex-1 min-w-0">
         <h3 className="text-base xl:text-lg font-semibold text-gray-900 truncate w-4/5">
           {title || formatFileName(fileUrl)}
@@ -35,10 +35,10 @@ const StatusBadge = ({ status }: { status: string }) => {
   return (
     <span
       className={cn(
-        'px-3 py-1 text-xs font-medium rounded-full capitalize',
-        status === 'completed'
-          ? 'bg-green-100 text-green-800'
-          : 'bg-yellow-100 text-yellow-800'
+        "px-3 py-1 text-xs font-medium rounded-full capitalize",
+        status === "completed"
+          ? "bg-emerald-100 text-emerald-800"
+          : "bg-amber-100 text-amber-800"
       )}
     >
       {status}
@@ -54,7 +54,7 @@ export default function SummaryCard({ summary }: { summary: any }) {
       animate="visible"
       whileHover={{
         scale: 1.02,
-        transition: { duration: 0.2, ease: 'easeOut' },
+        transition: { duration: 0.2, ease: "easeOut" },
       }}
     >
       <Card className="relative h-full">

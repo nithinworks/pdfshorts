@@ -1,42 +1,19 @@
-import { Sparkles } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { MotionDiv } from '../common/motion-wrapper';
-import { itemVariants } from '@/utils/constants';
+import { FileUp } from "lucide-react";
 
 export default function UploadHeader() {
   return (
-    <div className="flex flex-col items-center justify-center gap-6 text-center mb-4">
-      <MotionDiv
-        variants={itemVariants}
-        className="relative p-[1px] overflow-hidden rounded-full bg-linear-to-r from-rose-200 via-rose-500 to-rose-800 animate-gradient-x group"
-      >
-        <Badge
-          variant={'secondary'}
-          className="relative px-6 py-2 text-base font-medium bg-white rounded-full group-hover:bg-gray-50 transition-colors"
-        >
-          <Sparkles className="h-6 w-6 mr-2 text-rose-600 animate-pulse" />
-          <p className="text-base">AI-Powered Content Creation</p>
-        </Badge>
-      </MotionDiv>
-      <MotionDiv
-        variants={itemVariants}
-        className="capitalize text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"
-      >
-        Start Uploading{' '}
-        <span className="relative inline-block">
-          <span className="relative z-10 px-2">Your PDF's</span>
-          <span
-            className="absolute inset-0 bg-rose-200/50 -rotate-2 rounded-lg transform -skew-y-1"
-            aria-hidden="true"
-          ></span>
-        </span>{' '}
-      </MotionDiv>
-      <MotionDiv
-        variants={itemVariants}
-        className="mt-2 text-lg leading-8 text-gray-600 max-w-2xl text-center"
-      >
-        <p>Upload your PDF and let our AI do the magic! ✨</p>
-      </MotionDiv>
+    <div className="flex flex-col items-center gap-6 mb-8">
+      <div className="w-16 h-16 rounded-2xl bg-emerald-50 flex items-center justify-center">
+        <FileUp className="w-8 h-8 text-emerald-600" />
+      </div>
+      <div className="text-center space-y-2">
+        <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+          Upload Your PDF
+        </h1>
+        <p className="text-gray-600 text-lg max-w-md">
+          Get an AI-powered summary of your document in seconds
+        </p>
+      </div>
     </div>
   );
 }

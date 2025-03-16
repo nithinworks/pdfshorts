@@ -1,44 +1,65 @@
-import { FileText } from 'lucide-react';
-import { Button } from '../ui/button';
-import NavLink from './nav-link';
-import { SignedOut, UserButton } from '@clerk/nextjs';
-import { SignedIn } from '@clerk/nextjs';
-import PlanBadge from './plan-badge';
+import Link from "next/link";
+import { SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
+import { Button } from "@/components/ui/button";
+import { FileText } from "lucide-react";
+import Image from "next/image";
 
 export default function Header() {
   return (
-    <nav className="container flex items-center justify-between py-4 lg:px-8 px-2 mx-auto">
-      <div className="flex lg:flex-1">
-        <NavLink href="/" className="flex items-center gap-1 lg:gap-2 shrink-0">
-          <FileText className="w-5 h-5 lg:w-8 lg:h-8 text-gray-900 hover:rotate-12 transform transition duration-200 ease-in-out" />
-          <span className="font-extrabold lg:text-xl text-gray-900">
-            Sommaire
+    <header className="sticky top-0 z-50 w-full border-b border-emerald-100 bg-white/80 backdrop-blur-sm">
+      <div className="container flex h-16 items-center justify-between">
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/icon.png" alt="PDF Shorts Logo" width={32} height={32} />
+          <span className="text-xl font-bold bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+            PDF Shorts
           </span>
-        </NavLink>
-      </div>
+        </Link>
 
-      <div className="flex lg:justify-center gap-4 lg:gap-12 lg:items-center">
-        <NavLink href="/#pricing">Pricing</NavLink>
-        <SignedIn>
-          <NavLink href="/dashboard">Your Summaries</NavLink>
-        </SignedIn>
-      </div>
-
-      <div className="flex lg:justify-end lg:flex-1">
-        <SignedIn>
-          <div className="flex gap-2 items-center">
-            <NavLink href="/upload">Upload a PDF</NavLink>
-            <PlanBadge />
+        <div className="flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-6">
+            <Link
+              href="/#pricing"
+              className="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors"
+            >
+              Pricing
+            </Link>
             <SignedIn>
-              <UserButton />
+              <Link
+                href="/dashboard"
+                className="text-sm font-medium text-gray-600 hover:text-emerald-600 transition-colors"
+              >
+                Dashboard
+              </Link>
             </SignedIn>
-          </div>
-        </SignedIn>
+          </nav>
 
-        <SignedOut>
-          <NavLink href="/sign-in">Sign In</NavLink>
-        </SignedOut>
+          <div className="flex items-center gap-2">
+            <SignedIn>
+              <Link href="/upload">
+                <Button className="bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-teal-500 hover:to-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
+                  Short My PDF
+                </Button>
+              </Link>
+              <UserButton
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "h-8 w-8",
+                  },
+                }}
+              />
+            </SignedIn>
+
+            <SignedOut>
+              <Link href="/sign-in">
+                <Button className="bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-teal-500 hover:to-emerald-600 text-white shadow-lg hover:shadow-xl transition-all duration-200">
+                  Sign In
+                </Button>
+              </Link>
+            </SignedOut>
+          </div>
+        </div>
       </div>
-    </nav>
+    </header>
   );
 }

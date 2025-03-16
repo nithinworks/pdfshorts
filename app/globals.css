@@ -1,12 +1,12 @@
-@import 'tailwindcss';
-
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+@import "tailwindcss";
 @plugin 'tailwindcss-animate';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
   --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -67,7 +67,7 @@
 
 @layer utilities {
   body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Inter", sans-serif;
   }
 }
 
@@ -79,25 +79,25 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 350 89% 60%;
+    --primary: 152 76% 40%;
     --primary-foreground: 210 40% 98%;
-    --secondary: 350 33% 96%;
-    --secondary-foreground: 350 89% 60%;
-    --muted: 350 33% 96%;
+    --secondary: 152 76% 96%;
+    --secondary-foreground: 152 76% 40%;
+    --muted: 152 33% 96%;
     --muted-foreground: 215 25% 27%;
-    --accent: 350 33% 18%;
-    --accent-foreground: 350 89% 60%;
-    --destructive: 350 89% 50%;
+    --accent: 152 33% 18%;
+    --accent-foreground: 152 76% 40%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
-    --border: 350 33% 90%;
-    --input: 350 33% 90%;
-    --ring: 350 89% 60%;
+    --border: 152 33% 90%;
+    --input: 152 33% 90%;
+    --ring: 152 76% 40%;
     --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
+    --chart-1: 152 76% 40%;
+    --chart-2: 168 76% 40%;
+    --chart-3: 183 76% 40%;
+    --chart-4: 152 56% 45%;
+    --chart-5: 168 56% 45%;
   }
 
   .dark {
@@ -126,22 +126,21 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
+
   h1 {
-    @apply text-4xl md:text-6xl xl:text-7xl font-bold;
+    @apply text-4xl md:text-6xl xl:text-7xl font-bold tracking-tight;
   }
 
   h2 {
-    @apply text-xl lg:text-3xl font-medium;
+    @apply text-xl lg:text-3xl font-semibold tracking-tight;
   }
 
   h3 {
-    @apply text-2xl lg:text-4xl font-medium;
+    @apply text-2xl lg:text-4xl font-semibold tracking-tight;
   }
 
   a {
@@ -149,7 +148,7 @@
   }
 
   button {
-    @apply hover:cursor-pointer bg-rose-600 hover:bg-rose-700;
+    @apply hover:cursor-pointer bg-emerald-600 hover:bg-emerald-700;
   }
 
   @keyframes gradient-x {
@@ -177,5 +176,47 @@
   }
   @media (width >= 1400px) {
     max-width: 1400px;
+  }
+}
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* Add this if you don't already have it */
+.animate-gradient-x {
+  background-size: 200% 200%;
+  animation: gradient-x 15s ease infinite;
+}
+
+@keyframes gradient-x {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
   }
 }
