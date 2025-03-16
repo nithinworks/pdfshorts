@@ -80,7 +80,7 @@ export default function HeroSection() {
           className="text-white mt-12 text-base sm:text-lg lg:text-xl rounded-full px-8 sm:px-10 lg:px-12 py-6 sm:py-7 lg:py-8 bg-gradient-to-r from-emerald-600 to-teal-500 hover:from-teal-500 hover:to-emerald-600 hover:no-underline font-bold shadow-lg transition-all duration-300"
         >
           <Link href="/#pricing" className="flex gap-2 items-center">
-            <span>Start Summarizing Free</span>
+            <span>Start Summarizing</span>
             <ArrowRight className="animate-pulse" />
           </Link>
         </Button>
